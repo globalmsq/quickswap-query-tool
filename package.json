@@ -1,0 +1,31 @@
+{
+  "name": "search-quickswap",
+  "version": "1.0.0",
+  "description": "QuickSwap V3 Pool Transaction Query Tool",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": [
+    "quickswap",
+    "defi",
+    "graphql",
+    "polygon",
+    "uniswap-v3"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
