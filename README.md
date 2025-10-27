@@ -1,144 +1,144 @@
 # QuickSwap V3 Transaction Query Tool
 
-QuickSwap V3 Pool의 모든 트랜잭션(Swap, Add Liquidity, Remove Liquidity)을 조회하는 TypeScript CLI 도구입니다.
+A TypeScript CLI tool to query all transactions (Swap, Add Liquidity, Remove Liquidity) from QuickSwap V3 Pools.
 
 ## 🌟 Features
 
-- **완전한 트랜잭션 히스토리**: Pool의 모든 Swap, Mint(Add Liquidity), Burn(Remove Liquidity) 트랜잭션 조회
-- **QuickSwap V3 Subgraph 활용**: The Graph Protocol을 통한 빠르고 구조화된 데이터 조회
-- **Polygon 네트워크 지원**: QuickSwap V3 (Polygon 메인넷)
-- **유연한 출력 형식**: 콘솔 출력 또는 JSON 파일 저장
-- **페이지네이션 지원**: 대량의 트랜잭션 데이터 자동 처리
-- **타입 안정성**: TypeScript로 작성된 안전한 코드
+- **Complete Transaction History**: Query all Swap, Mint (Add Liquidity), Burn (Remove Liquidity) transactions from pools
+- **QuickSwap V3 Subgraph Integration**: Fast and structured data queries through The Graph Protocol
+- **Polygon Network Support**: QuickSwap V3 on Polygon mainnet
+- **Flexible Output Formats**: Console output, JSON, or CSV file export
+- **Pagination Support**: Automatic handling of large transaction datasets
+- **Type Safety**: Secure code written in TypeScript
 
 ## 📋 Prerequisites
 
-- Node.js 18 이상
-- npm 또는 yarn
-- **The Graph API Key** (무료) - [여기서 발급](https://thegraph.com/studio/apikeys/)
+- Node.js 18 or higher
+- npm or yarn
+- **The Graph API Key** (free) - [Get it here](https://thegraph.com/studio/apikeys/)
 
 ## 🚀 Installation
 
 ```bash
-# 의존성 설치
+# Install dependencies
 npm install
 
-# TypeScript 빌드
+# Build TypeScript
 npm run build
 ```
 
-## 🔑 API Key 설정
+## 🔑 API Key Setup
 
-이 도구는 The Graph의 Subgraph를 사용하므로 **무료 API key**가 필요합니다.
+This tool uses The Graph's Subgraph, so you need a **free API key**.
 
-### API Key 발급 방법:
+### How to get an API Key:
 
-1. [The Graph Studio](https://thegraph.com/studio/apikeys/)에 접속
-2. 계정 생성 또는 로그인
-3. "Create API Key" 클릭
-4. API Key 복사
+1. Visit [The Graph Studio](https://thegraph.com/studio/apikeys/)
+2. Create an account or log in
+3. Click "Create API Key"
+4. Copy your API Key
 
-### API Key 사용 방법:
+### How to use the API Key:
 
-#### 방법 1: 환경 변수로 설정
+#### Option 1: Set as environment variable
 ```bash
 export GRAPH_API_KEY=your_api_key_here
 ```
 
-#### 방법 2: .env 파일 생성 (권장)
+#### Option 2: Create .env file (Recommended)
 ```bash
-# .env.example을 복사하여 .env 파일 생성
+# Copy .env.example to create .env file
 cp .env.example .env
 
-# .env 파일을 편집하여 실제 API key 입력
+# Edit .env file to add your actual API key
 # GRAPH_API_KEY=your_actual_api_key_here
 ```
 
-#### 방법 3: 명령어 실행 시 직접 지정
+#### Option 3: Specify directly when running command
 ```bash
 GRAPH_API_KEY=your_key npm start -- 174446
 ```
 
 ## 💻 Usage
 
-### 기본 사용법
+### Basic Usage
 
-#### Position ID 사용
-Position ID를 사용하여 해당 Pool의 모든 트랜잭션을 조회합니다:
+#### Using Position ID
+Query all transactions from a pool using its Position ID:
 
 ```bash
 GRAPH_API_KEY=your_key npm start -- 174446
 ```
 
-#### Pool 주소 직접 사용
-Pool의 contract 주소를 직접 사용할 수도 있습니다:
+#### Using Pool Address Directly
+You can also use the pool's contract address directly:
 
 ```bash
 GRAPH_API_KEY=your_key npm start -- 0x55caabb0d2b704fd0ef8192a7e35d8837e678207
 ```
 
-### 옵션
+### Options
 
-#### 트랜잭션 개수 제한
+#### Limit Transaction Count
 
-최근 N개의 트랜잭션만 조회:
+Query only the most recent N transactions:
 
 ```bash
 npm start -- 174446 --limit 100
 ```
 
-#### 기간별 필터링
+#### Filter by Date Range
 
-특정 기간의 트랜잭션만 조회:
+Query transactions for specific time periods:
 
 ```bash
-# 최근 7일간의 트랜잭션
+# Transactions from the last 7 days
 npm start -- 174446 --days 7
 
-# 특정 날짜 범위 (YYYY-MM-DD 형식)
+# Specific date range (YYYY-MM-DD format)
 npm start -- 174446 --from-date 2025-01-01 --to-date 2025-01-31
 
-# 특정 날짜 이후의 모든 트랜잭션
+# All transactions after a specific date
 npm start -- 174446 --from-date 2025-01-01
 
-# 특정 날짜 이전의 모든 트랜잭션
+# All transactions before a specific date
 npm start -- 174446 --to-date 2025-01-31
 
-# 기간 필터링과 개수 제한 함께 사용
+# Combine date filtering with limit
 npm start -- 174446 --days 30 --limit 100
 ```
 
-**참고**: 모든 날짜는 UTC 기준이며, YYYY-MM-DD 형식을 사용합니다.
+**Note**: All dates are in UTC timezone using YYYY-MM-DD format.
 
-#### JSON 파일로 저장
+#### Save to JSON File
 
-콘솔 대신 JSON 파일로 출력:
+Output to JSON file instead of console:
 
 ```bash
 npm start -- 174446 --output json
 ```
 
-#### CSV 파일로 저장
+#### Save to CSV File
 
-CSV 형식으로 저장하여 Excel 등에서 분석:
+Save in CSV format for analysis in Excel, etc.:
 
 ```bash
 npm start -- 174446 --output csv
 ```
 
-#### 출력 파일 경로 지정
+#### Specify Output File Path
 
 ```bash
-# JSON 파일명 지정
+# Specify JSON filename
 npm start -- 174446 --output json --output-path my_transactions.json
 
-# CSV 파일명 지정
+# Specify CSV filename
 npm start -- 174446 --output csv --output-path my_transactions.csv
 ```
 
-### 개발 모드
+### Development Mode
 
-빌드 없이 바로 실행:
+Run without building:
 
 ```bash
 npm run dev -- 174446
@@ -146,7 +146,7 @@ npm run dev -- 174446
 
 ## 📊 Output Format
 
-### 1. Console Output (기본)
+### 1. Console Output (Default)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -243,7 +243,7 @@ Additional Info:
 
 ### 3. CSV Output
 
-CSV 파일은 Excel, Google Sheets 등에서 바로 열 수 있으며, 데이터 분석에 최적화되어 있습니다.
+CSV files can be opened directly in Excel, Google Sheets, etc., and are optimized for data analysis.
 
 ```csv
 Type,Timestamp,Block,Transaction Hash,From,To,Token0 Symbol,Token0 Amount,Token1 Symbol,Token1 Amount,USD Value,Tick,Price,Tick Lower,Tick Upper
@@ -252,48 +252,48 @@ MINT,2025-10-26T15:30:00.000Z,78150000,0x1234abcd...,0xaabbccdd...,0x11223344...
 BURN,2025-10-25T10:15:30.000Z,78100000,0x5678efgh...,0x99887766...,,SUT,50.000000,USDT,100000000000000.000000,100.00,,,-276000,-260000
 ```
 
-**CSV 컬럼 설명:**
-- **Type**: 트랜잭션 타입 (SWAP, MINT, BURN)
-- **Timestamp**: 트랜잭션 발생 시간 (ISO 8601)
-- **Block**: 블록 번호
-- **Transaction Hash**: 트랜잭션 해시
-- **From**: 보내는 주소
-- **To**: 받는 주소 (SWAP의 경우)
-- **Token0/Token1 Symbol**: 토큰 심볼
-- **Token0/Token1 Amount**: 토큰 수량 (소수점 포함)
-- **USD Value**: USD 환산 가치
-- **Tick**: 현재 틱 (SWAP의 경우)
-- **Price**: 가격 (SWAP의 경우)
-- **Tick Lower/Upper**: 틱 범위 (MINT/BURN의 경우)
+**CSV Column Descriptions:**
+- **Type**: Transaction type (SWAP, MINT, BURN)
+- **Timestamp**: Transaction timestamp (ISO 8601)
+- **Block**: Block number
+- **Transaction Hash**: Transaction hash
+- **From**: Sender address
+- **To**: Recipient address (for SWAP)
+- **Token0/Token1 Symbol**: Token symbol
+- **Token0/Token1 Amount**: Token amount (with decimals)
+- **USD Value**: USD equivalent value
+- **Tick**: Current tick (for SWAP)
+- **Price**: Price (for SWAP)
+- **Tick Lower/Upper**: Tick range (for MINT/BURN)
 ```
 
 ## 🔍 Transaction Types
 
 ### SWAP
-- **설명**: 토큰 교환 트랜잭션
-- **포함 정보**: sender, recipient, amount0, amount1, price impact, tick
+- **Description**: Token exchange transaction
+- **Included Information**: sender, recipient, amount0, amount1, price impact, tick
 
 ### MINT (Add Liquidity)
-- **설명**: 유동성 추가 트랜잭션
-- **포함 정보**: sender, owner, amount0, amount1, tick range
+- **Description**: Liquidity addition transaction
+- **Included Information**: sender, owner, amount0, amount1, tick range
 
 ### BURN (Remove Liquidity)
-- **설명**: 유동성 제거 트랜잭션
-- **포함 정보**: owner, amount0, amount1, tick range
+- **Description**: Liquidity removal transaction
+- **Included Information**: owner, amount0, amount1, tick range
 
 ## 🏗️ Project Structure
 
 ```
 search-quickswap/
-├── package.json          # 프로젝트 설정 및 의존성
-├── tsconfig.json         # TypeScript 설정
-├── README.md            # 이 파일
+├── package.json          # Project config and dependencies
+├── tsconfig.json         # TypeScript configuration
+├── README.md            # This file
 ├── src/
-│   ├── index.ts         # CLI 메인 진입점
-│   ├── queries.ts       # GraphQL 쿼리 정의
-│   ├── types.ts         # TypeScript 타입 정의
-│   └── formatters.ts    # 데이터 포맷팅 유틸리티
-└── dist/                # 빌드 결과물 (생성됨)
+│   ├── index.ts         # CLI main entry point
+│   ├── queries.ts       # GraphQL query definitions
+│   ├── types.ts         # TypeScript type definitions
+│   └── formatters.ts    # Data formatting utilities
+└── dist/                # Build output (generated)
 ```
 
 ## 🔧 Technical Details
@@ -306,74 +306,74 @@ https://gateway.thegraph.com/api/subgraphs/id/FqsRcH1XqSjqVx9GRTvEJe959aCbKrcyGg
 
 ### Key Dependencies
 
-- **graphql-request**: GraphQL 클라이언트
-- **typescript**: 타입 안정성
-- **tsx**: 개발 모드 실행
+- **graphql-request**: GraphQL client
+- **typescript**: Type safety
+- **tsx**: Development mode execution
 
 ## 📝 Examples
 
-### Example 1: 기본 조회
+### Example 1: Basic Query
 ```bash
 npm start -- 174446
 ```
 
-### Example 2: 최근 50개만 조회
+### Example 2: Query Last 50 Transactions
 ```bash
 npm start -- 174446 --limit 50
 ```
 
-### Example 3: JSON으로 저장
+### Example 3: Save as JSON
 ```bash
 npm start -- 174446 --output json --output-path quickswap_transactions.json
 ```
 
-### Example 4: CSV로 저장
+### Example 4: Save as CSV
 ```bash
 npm start -- 174446 --output csv --output-path quickswap_transactions.csv
 ```
 
-### Example 5: 대량 데이터 CSV 분석
+### Example 5: Large Dataset CSV Analysis
 ```bash
-# 최근 1000개 트랜잭션을 CSV로 저장
+# Save the last 1000 transactions as CSV
 npm start -- 174446 --limit 1000 --output csv
 ```
 
-### Example 6: 기간별 분석
+### Example 6: Date Range Analysis
 ```bash
-# 최근 한 달간의 트랜잭션을 CSV로 저장
+# Save last month's transactions as CSV
 npm start -- 174446 --days 30 --output csv
 
-# 2025년 1월의 모든 트랜잭션 조회
+# Query all transactions from January 2025
 npm start -- 174446 --from-date 2025-01-01 --to-date 2025-01-31
 
-# 특정 기간의 스왑만 100개 제한
+# Limit to 100 swaps from a specific period
 npm start -- 174446 --from-date 2025-01-15 --limit 100 --output json
 ```
 
 ## 🐛 Troubleshooting
 
 ### "auth error: missing authorization header"
-API key가 설정되지 않았습니다. 다음을 확인하세요:
+API key is not configured. Please check the following:
 
-1. `.env` 파일이 프로젝트 루트에 있는지 확인
-2. `.env` 파일에 `GRAPH_API_KEY=your_key` 형식으로 작성되어 있는지 확인
-3. API key가 유효한지 [The Graph Studio](https://thegraph.com/studio/apikeys/)에서 확인
+1. Verify the `.env` file exists in the project root
+2. Ensure the `.env` file contains `GRAPH_API_KEY=your_key` format
+3. Confirm the API key is valid at [The Graph Studio](https://thegraph.com/studio/apikeys/)
 
 ### Position not found
-Position ID가 올바른지 확인하세요. QuickSwap 웹사이트의 URL에서 확인할 수 있습니다:
+Verify the Position ID is correct. You can find it in the QuickSwap website URL:
 ```
 https://dapp.quickswap.exchange/pool/positions/v3/174446?chainId=137
                                                       ^^^^^^
                                                   Position ID
 ```
 
-또는 Pool 주소를 직접 사용해보세요:
+Or try using the pool address directly:
 ```bash
 GRAPH_API_KEY=your_key npm start -- 0x55caabb0d2b704fd0ef8192a7e35d8837e678207
 ```
 
 ### Rate limiting
-Subgraph에서 rate limiting이 발생하면 잠시 후 다시 시도하세요. The Graph의 무료 플랜은 충분한 쿼리 한도를 제공합니다.
+If rate limiting occurs from the subgraph, please wait and try again. The Graph's free plan provides sufficient query limits.
 
 ## 📄 License
 
