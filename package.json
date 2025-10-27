@@ -1,5 +1,5 @@
 {
-  "name": "search-quickswap",
+  "name": "quickswap-query-tool",
   "version": "1.0.0",
   "description": "QuickSwap V3 Pool Transaction Query Tool",
   "main": "dist/index.js",

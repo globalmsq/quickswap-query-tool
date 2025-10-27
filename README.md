@@ -284,7 +284,7 @@ BURN,2025-10-25T10:15:30.000Z,78100000,0x5678efgh...,0x99887766...,,SUT,50.00000
 ## 🏗️ Project Structure
 
 ```
-search-quickswap/
+quickswap-query-tool/
 ├── package.json          # Project config and dependencies
 ├── tsconfig.json         # TypeScript configuration
 ├── README.md            # This file
